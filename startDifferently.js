@@ -7,6 +7,8 @@ const {
   MessageComponentTypes,
   ButtonStyleTypes,
 } = require('discord-interactions');
+const verifyKey = require('discord-interactions');
+
 const commandConstants = require("./commandConstants.js");
 
 const env = process.env;
@@ -77,7 +79,7 @@ app.post('/interactions', async function (req, res) {
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
           // Fetches a random emoji to send from a helper function
-          content: 'hello world ' + getRandomEmoji(),
+          content: resp
         },
       });
     }});
