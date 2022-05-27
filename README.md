@@ -1,7 +1,7 @@
 # Usage
 This command will save the payout address to the SourceCred account corresponding to the user of the command. The payout address is saved directly to the configured instance's Ledger.
 ```
-/setpayoutaddress 0xF6mSADFk42fdDdsE42FKEfdlkz6
+/setpayoutaddress 0xEdd000B7Db3cb8931d4E0cb1D0DBe6B947Ceb09A
 ```
 
 You can also use these commands to enable and disable your account for receiving Grain distributions.
