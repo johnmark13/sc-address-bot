@@ -17,21 +17,6 @@ const BOT_SECRET = env.BOT_SECRET;
 const {setAddressHandler} = require("./handlers/setAddress.js");
 const {activateHandler, deactivateHandler} = require("./handlers/activate-deactivate.js");
 
-function VerifyDiscordRequest(clientKey) {
-    return function (req, res, buf, encoding) {
-      const signature = req.get('X-Signature-Ed25519');
-      const timestamp = req.get('X-Signature-Timestamp');
-  
-      console.log("And the key is: " + clientKey);
-      const isValidRequest = verifyKey(req., signature, timestamp, clientKey);
-      if (!isValidRequest) {
-        res.status(401).send('Bad request signature');
-        throw new Error('Bad request signature');
-      }
-    };
-  }
-
-
 // Create an express app
 const app = express();
 // Get port, or default to 3000
