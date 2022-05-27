@@ -7,7 +7,7 @@ const {
   MessageComponentTypes,
   ButtonStyleTypes,
 } = require('discord-interactions');
-const verifyKey = require('discord-interactions').verifyKeyMiddleware;
+const verifyKeyMiddleware = require('discord-interactions').verifyKeyMiddleware;
 
 const commandConstants = require("./commandConstants.js");
 
