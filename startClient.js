@@ -1,4 +1,3 @@
-const keep_alive = require('./keep_alive.js')
 const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 const commandConstants = require("./commandConstants.js")
