@@ -7,7 +7,7 @@ const {
   MessageComponentTypes,
   ButtonStyleTypes,
 } = require('discord-interactions');
-const verifyKey = require('discord-interactions').verifyKey;
+const verifyKey = require('discord-interactions').verifyKeyMiddleware;
 
 const commandConstants = require("./commandConstants.js");
 
@@ -23,7 +23,7 @@ function VerifyDiscordRequest(clientKey) {
       const timestamp = req.get('X-Signature-Timestamp');
   
       console.log("And the key is: " + clientKey);
-      const isValidRequest = verifyKey(buf, signature, timestamp, clientKey);
+      const isValidRequest = verifyKey(req., signature, timestamp, clientKey);
       if (!isValidRequest) {
         res.status(401).send('Bad request signature');
         throw new Error('Bad request signature');
@@ -36,14 +36,11 @@ function VerifyDiscordRequest(clientKey) {
 const app = express();
 // Get port, or default to 3000
 const PORT = process.env.PORT || 3000;
-// Parse request body and verifies incoming requests using discord-interactions package
-app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
-
 
 /**
  * Interactions endpoint URL where Discord will send HTTP requests
  */
-app.post('/interactions', async function (req, res) {
+app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async function (req, res) {
   // Interaction type and data
   const { type, id, data } = req.body;
 
