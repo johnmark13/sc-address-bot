@@ -4,6 +4,9 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 const commandConstants = require("./commandConstants.js")
 require('dotenv').config();
 
+const dotenv = require("dotenv")
+dotenv.config()
+
 const env = process.env;
 const BOT_SECRET = env.BOT_SECRET;
 
@@ -12,6 +15,10 @@ const {activateHandler, deactivateHandler} = require("./handlers/activate-deacti
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
+});
+
+client.on('message', async message => {
+  console.log("Someone is talking to me: " + message.content);
 });
 
 client.on('interactionCreate', async interaction => {
