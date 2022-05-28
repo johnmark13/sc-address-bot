@@ -4,8 +4,8 @@ const configs = require("../config.js")
 const commandConstants = require("../commandConstants.js")
 
 module.exports = {
-    setAddressHandler: async (intData) => {
-        console.log("We've got: " + intData);
+    setAddressHandler: (intData) => {
+        console.log("We've got: " + JSON.stringify(intData));
         return "allGood";
     }
 }
