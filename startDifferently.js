@@ -44,10 +44,10 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
   if (type === InteractionType.APPLICATION_COMMAND) {
     const { name } = data;
 
-    let resp = "That didn't work";
+    let resp = "nah mate";
 
     if (name === commandConstants.SET_ADDRESS_NAME) {
-      resp = "Set address please";
+      resp = setAddressHandler(data);
     }
     else if (name === commandConstants.ACTIVATE_NAME) {
         resp = resp = "Activate please";
