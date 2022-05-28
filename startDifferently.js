@@ -47,7 +47,7 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
     let resp = "nah mate";
 
     if (name === commandConstants.SET_ADDRESS_NAME) {
-      resp = setAddressHandler(data);
+      resp = (await setAddressHandler(data));
     }
     else if (name === commandConstants.ACTIVATE_NAME) {
         resp = resp = "Activate please";
