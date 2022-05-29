@@ -5,6 +5,9 @@ const commandConstants = require("../commandConstants.js")
 
 module.exports = {
     setAddressHandler: async (intMember, intData) => {
+        console.log(`Member: ${JSON.stringify(intMember)}`);
+        console.log(`Data: ${JSON.stringify(intData)}`);
+
         const addressElement = intData.options[0];
         const address = addressElement.value;
         const guildid = intData.guild_Id;
