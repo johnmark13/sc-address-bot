@@ -24,8 +24,22 @@ module.exports = {
             console.log(ledgerManager);
             await ledgerManager.reloadLedger()
             console.log("Here");
-            const discordAddress = getDiscordAddressFromId(intMember.user.id, false)
+            const discordAddress = getDiscordAddressFromId(intMember.user.id, false);
             console.log(`Discord Address; ${discordAddress}`);
+
+            const baseIdentityProposal = sc.plugins.discord.utils.identity.createIdentity(
+                intMember,
+            );
+
+            console.log(`Base Identity ${baseIdentityProposal}`);
+
+            const baseIdentityId = sc.ledger.utils.ensureIdentityExists(
+                ledgerManager,
+                baseIdentityProposal,
+            );
+
+            console.log(`Base Id: ${baseIdentityId}`);
+
             const account = ledgerManager.ledger.accountByAddress(discordAddress);
             console.log(`SC Account; ${JSON.stringify(account)}`);
             if (account) {
