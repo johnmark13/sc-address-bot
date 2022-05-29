@@ -5,10 +5,12 @@ const commandConstants = require("../commandConstants.js")
 
 module.exports = {
     setAddressHandler: async (intMember, intData) => {
-        console.log("We've got: " + intData.id + " : " + intData.options[0].name + " : " + intData.options[0].value);
         const addressElement = intData.options[0];
         const address = addressElement.value;
-        const config = configs.GUILD_IDS[intData.guildId]
+        const guildid = intData.guild_Id;
+
+        console.log(`Setting member address for: ${guildid}`);
+        const config = configs.GUILD_IDS[guildid];
 
         if (!config) {
             return "Self ativation not correctly configured for this server, check guild setup";
