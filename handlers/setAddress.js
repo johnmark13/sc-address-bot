@@ -19,23 +19,17 @@ module.exports = {
             await ledgerManager.reloadLedger()
             const discordAddress = getDiscordAddressFromId(intMember.user.id, false);
 
-            console.log(`Discord Address that is really an SC address; ${discordAddress}`);
-
             const baseIdentityProposal = sc.plugins.discord.utils.identity.createIdentity(
                 intMember,
             );
-
-            console.log(`Base Identity ${baseIdentityProposal}`);
 
             const baseIdentityId = sc.ledger.utils.ensureIdentityExists(
                 ledgerManager.ledger,
                 baseIdentityProposal,
             );
 
-            console.log(`Base Id: ${baseIdentityId}`);
-
             const account = ledgerManager.ledger.accountByAddress(discordAddress);
-            console.log(`SC Account; ${JSON.stringify(account)}`);
+            
             if (account) {
                 const uuid = account.identity.id
                 console.log(`SC account already exists, updating payout address: ${uuid}`);

@@ -4,54 +4,64 @@ const configs = require("../config.js")
 const commandConstants = require("../commandConstants.js")
 
 module.exports = {
-    activateHandler: async (interaction) => {
-        await interaction.deferReply();
-        const config = configs.GUILD_IDS[interaction.guildId]
+    activateHandler: async (intMember, intData) => {
+        const config = configs.GUILD_IDS[intData.guild_id];
+
+        if (!config) {
+            return "Self ativation not correctly configured for this server, check guild setup";
+        }
+
         try {
-            const ledgerManager = new sc.ledger.manager.LedgerManager({storage: new sc.ledger.storage.WritableGithubStorage({apiToken: process.env.GITHUB_SECRET, repo: config.repo, branch: config.branch})})
+            const ledgerManager = new sc.ledger.manager.LedgerManager({storage: new sc.ledger.storage.WritableGithubStorage({apiToken: process.env.GITHUB_SECRET, repo: config.repo, branch: config.branch})});
 
-            const discordAddress = getDiscordAddressFromId(interaction.member.user.id, false)
+            const discordAddress = getDiscordAddressFromId(intMember.user.id, false);
 
-            await ledgerManager.reloadLedger()
+            await ledgerManager.reloadLedger();
 
-            const account = ledgerManager.ledger.accountByAddress(discordAddress)
-            const uuid = account.identity.id
-            const oldLength = ledgerManager.ledger.eventLog().length
+            const account = ledgerManager.ledger.accountByAddress(discordAddress);
+            const uuid = account.identity.id;
+            const oldLength = ledgerManager.ledger.eventLog().length;
 
-            ledgerManager.ledger.activate(uuid)
+            ledgerManager.ledger.activate(uuid);
             const result = ledgerManager.ledger.eventLog().length > oldLength ? await ledgerManager.persist() : {}
-            if (result.error) throw result.error;
+            
+            if (result.error) {
+                return "Could not activate address: " + result.error.toString();
+            }
 
-            await interaction.editReply({
-                content: `Successfully activated ${account.identity.name}. Note, you might start receiving airdrops automatically.`});
+            return `Successfully activated ${account.identity.name}. Note, you might start receiving airdrops automatically.`;
         } catch (e) {
-            await interaction.editReply({
-                    content: `Failed with message: ` + e});
+            return `Failed with message: ` + e;
         }
     },
-    deactivateHandler: async (interaction) => {
-        await interaction.deferReply();
-        const config = configs.GUILD_IDS[interaction.guildId]
+    deactivateHandler: async (intMember, intData) => {
+        const config = configs.GUILD_IDS[intData.guild_id];
+
+        if (!config) {
+            return "Self ativation not correctly configured for this server, check guild setup";
+        }
+
         try {
-            const ledgerManager = new sc.ledger.manager.LedgerManager({storage: new sc.ledger.storage.WritableGithubStorage({apiToken: process.env.GITHUB_SECRET, repo: config.repo, branch: config.branch})})
+            const ledgerManager = new sc.ledger.manager.LedgerManager({storage: new sc.ledger.storage.WritableGithubStorage({apiToken: process.env.GITHUB_SECRET, repo: config.repo, branch: config.branch})});
 
-            const discordAddress = getDiscordAddressFromId(interaction.member.user.id, false)
+            const discordAddress = getDiscordAddressFromId(intMember.user.id, false);
 
-            await ledgerManager.reloadLedger()
+            await ledgerManager.reloadLedger();
 
-            const account = ledgerManager.ledger.accountByAddress(discordAddress)
-            const uuid = account.identity.id
-            const oldLength = ledgerManager.ledger.eventLog().length
+            const account = ledgerManager.ledger.accountByAddress(discordAddress);
+            const uuid = account.identity.id;
+            const oldLength = ledgerManager.ledger.eventLog().length;
 
-            ledgerManager.ledger.deactivate(uuid)
+            ledgerManager.ledger.deactivate(uuid);
             const result = ledgerManager.ledger.eventLog().length > oldLength ? await ledgerManager.persist() : {}
-            if (result.error) throw result.error;
+            
+            if (result.error) {
+                return "Could not deactivate address: " + result.error.toString();
+            }
 
-            await interaction.editReply({
-                content: `Successfully deactivated ${account.identity.name}.`});
+            return `Successfully deactivated ${account.identity.name}.`;
         } catch (e) {
-            await interaction.editReply({
-                    content: `Failed with message: ` + e});
+            return `Failed with message: ` + e;
         }
     }
 }
