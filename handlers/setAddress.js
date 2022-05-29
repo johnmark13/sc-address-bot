@@ -28,7 +28,7 @@ module.exports = {
             console.log(`Base Identity ${baseIdentityProposal}`);
 
             const baseIdentityId = sc.ledger.utils.ensureIdentityExists(
-                ledgerManager,
+                ledgerManager.ledger,
                 baseIdentityProposal,
             );
 
