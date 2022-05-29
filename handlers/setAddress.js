@@ -10,7 +10,7 @@ module.exports = {
 
         const addressElement = intData.options[0];
         const address = addressElement.value;
-        const guildid = intData.guild_Id;
+        const guildid = intData.guild_id;
 
         console.log(`Setting member address for: ${guildid}`);
         const config = configs.GUILD_IDS[guildid];
