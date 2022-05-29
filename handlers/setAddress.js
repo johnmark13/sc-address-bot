@@ -21,10 +21,15 @@ module.exports = {
 
         try {
             const ledgerManager = new sc.ledger.manager.LedgerManager({storage: new sc.ledger.storage.WritableGithubStorage({apiToken: process.env.GITHUB_SECRET, repo: config.repo, branch: config.branch})})
+            console.log(ledgerManager);
             await ledgerManager.reloadLedger()
+            console.log("Here");
             const discordAddress = getDiscordAddressFromId(intMember.user.id, false)
+            console.log(`Discord Address; ${discordAddress}`);
             const account = ledgerManager.ledger.accountByAddress(discordAddress)
+            console.log(`Discord Address; ${JSON.stringify(account)}`);
             const uuid = account.identity.id
+            console.log(`UUID: ${uuid}`);
             ledgerManager.ledger.setPayoutAddress(uuid, address, config.chainId, config.tokenAddress)
             const result = await ledgerManager.persist()
             if (result.error) {
