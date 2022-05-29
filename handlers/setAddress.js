@@ -4,7 +4,7 @@ const configs = require("../config.js")
 const commandConstants = require("../commandConstants.js")
 
 module.exports = {
-    setAddressHandler: (intMember, intData) => {
+    setAddressHandler: async (intMember, intData) => {
         console.log("We've got: " + intData.id + " : " + intData.options[0].name + " : " + intData.options[0].value);
         const address = intData.options[0](commandConstants.SET_ADDRESS_PARAM)
         const config = configs.GUILD_IDS[interaction.guildId]
