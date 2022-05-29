@@ -5,14 +5,9 @@ const commandConstants = require("../commandConstants.js")
 
 module.exports = {
     setAddressHandler: async (intMember, intData) => {
-        console.log(`Member: ${JSON.stringify(intMember)}`);
-        console.log(`Data: ${JSON.stringify(intData)}`);
-
         const addressElement = intData.options[0];
         const address = addressElement.value;
         const guildid = intData.guild_id;
-
-        console.log(`Setting member address for: ${guildid}`);
         const config = configs.GUILD_IDS[guildid];
 
         if (!config) {
@@ -21,11 +16,10 @@ module.exports = {
 
         try {
             const ledgerManager = new sc.ledger.manager.LedgerManager({storage: new sc.ledger.storage.WritableGithubStorage({apiToken: process.env.GITHUB_SECRET, repo: config.repo, branch: config.branch})})
-            console.log(ledgerManager);
             await ledgerManager.reloadLedger()
-            console.log("Here");
             const discordAddress = getDiscordAddressFromId(intMember.user.id, false);
-            console.log(`Discord Address; ${discordAddress}`);
+
+            console.log(`Discord Address that is really an SC address; ${discordAddress}`);
 
             const baseIdentityProposal = sc.plugins.discord.utils.identity.createIdentity(
                 intMember,
