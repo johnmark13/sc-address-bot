@@ -68,10 +68,10 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
       resp = (await setAddressHandler(member, data));
     }
     else if (name === commandConstants.ACTIVATE_NAME) {
-        resp = resp = "Activate please";
+        resp = (await activateHandler.activateHandler(member, data));
     }
     else if (name === commandConstants.DEACTIVATE_NAME) {
-        resp = resp = "Deactivate please";
+        resp = (await activateHandler.deactivateHandler(member, data));
     }
 
 
