@@ -29,7 +29,7 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
   // Interaction type and data
   const { type, id, data } = req.body;
 
-  console.log("Something happened: " + type);
+  console.log("Something happened: " + JSON.stringify(req.body));
   /**
    * Handle verification requests
    */
