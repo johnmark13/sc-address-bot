@@ -26,17 +26,35 @@ module.exports = {
             console.log("Here");
             const discordAddress = getDiscordAddressFromId(intMember.user.id, false)
             console.log(`Discord Address; ${discordAddress}`);
-            const account = ledgerManager.ledger.accountByAddress(discordAddress)
-            console.log(`Discord Address; ${JSON.stringify(account)}`);
-            const uuid = account.identity.id
-            console.log(`UUID: ${uuid}`);
-            ledgerManager.ledger.setPayoutAddress(uuid, address, config.chainId, config.tokenAddress)
-            const result = await ledgerManager.persist()
-            if (result.error) {
-                return "Could not save address: " + result.error.toString();
-            }
+            const account = ledgerManager.ledger.accountByAddress(discordAddress);
+            console.log(`SC Account; ${JSON.stringify(account)}`);
+            if (account) {
+                const uuid = account.identity.id
+                console.log(`SC account already exists, updating payout address: ${uuid}`);
+                ledgerManager.ledger.setPayoutAddress(uuid, address, config.chainId, config.tokenAddress)
+                const result = await ledgerManager.persist();
 
-            return `Success!\n**New payout address:** ${address}\n**Account:** ${account.identity.name}\n**Chain Id:** ${config.chainId}\n**Token Address:** ${config.tokenAddress}`;
+                if (result.error) {
+                    return "Could not save address: " + result.error.toString();
+                }
+    
+                return `Success!\n**New payout address:** ${address}\n**Account:** ${account.identity.name}\n**Chain Id:** ${config.chainId}\n**Token Address:** ${config.tokenAddress}`;
+            }
+            else {
+                console.log(`SC does not exist, creating new alias`);
+                ledgerManager.ledger.addAlias(baseIdentityId, ethAlias);
+                ledgerManager.ledger.activate(baseIdentityId);
+
+                const result = await manager.persist();
+
+                if (result.error) {
+                    return "Could not save address: " + result.error.toString();
+                }
+    
+                return `Success!\n**New SC Account address:** ${address}\n**Chain Id:** ${config.chainId}\n**Token Address:** ${config.tokenAddress}`;
+            }
+            
+            
         } catch (e) {
             return `Failed with message: ` + e;
         }
