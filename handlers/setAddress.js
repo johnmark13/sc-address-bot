@@ -8,7 +8,7 @@ module.exports = {
         console.log("We've got: " + intData.id + " : " + intData.options[0].name + " : " + intData.options[0].value);
         const addressElement = intData.options[0];
         const address = addressElement.value;
-        const config = configs.GUILD_IDS[interaction.guildId]
+        const config = configs.GUILD_IDS[intData.guildId]
 
         if (!config) {
             return "Self ativation not correctly configured for this server, check guild setup";
