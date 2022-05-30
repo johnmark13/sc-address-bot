@@ -20,7 +20,7 @@ module.exports = {
             
             const baseIdentityProposal = sc.plugins.discord.utils.identity.createIdentity(
                 "USER",
-                intMember.user.usename
+                intMember.user.username
             );
 
             const baseIdentityId = sc.ledger.utils.ensureIdentityExists(
