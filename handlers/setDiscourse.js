@@ -26,9 +26,9 @@ module.exports = {
                 description: `discourse/[@${discourseUsername}](https://forum.nation3.org/u/@${discourseUsername}/)`
               };    
 
-              console.log(`Going to add Alias ${JSON.stringify(githubAlias)}`);
+              console.log(`Going to add Alias ${JSON.stringify(discourseAlias)}`);
 
-            ledgerManager.ledger.addAlias(baseIdentityId, githubAlias);
+            ledgerManager.ledger.addAlias(baseIdentityId, discourseAlias);
 
             console.log(`Added Alias`);
 
