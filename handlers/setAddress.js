@@ -19,7 +19,6 @@ module.exports = {
             await ledgerManager.reloadLedger();
             const baseIdentityId = makeSureUserExistsAndGetId(ledgerManager, intMember);
 
-            //discord Alias
             const discordAddress = getDiscordAddressFromId(intMember.user.username, false);
             const discordAlias = {
                 address: discordAddress,
@@ -38,26 +37,8 @@ module.exports = {
             //intMember.user.discriminator
             //{"action":{"identity":{"address":"N\u0000sourcecred\u0000core\u0000IDENTITY\u0000a5tJVT4CBbEWJaXsngglKw\u0000","aliases":[],"id":"a5tJVT4CBbEWJaXsngglKw","name":"JohnMark13","subtype":"USER"},"type":"CREATE_IDENTITY"},"ledgerTimestamp":1652442119715,"uuid":"8q5D883QieY9DvkB51kxZw","version":"1"}
             //{"action":{"alias":{"address":"N\u0000sourcecred\u0000discord\u0000MEMBER\u0000user\u0000907282205347295302\u0000","description":"discord/JohnMark13#0838"},"identityId":"a5tJVT4CBbEWJaXsngglKw","type":"ADD_ALIAS"},"ledgerTimestamp":1652442119715,"uuid":"PGCZ10fvIPmQsED1xJf9nQ","version":"1"}
-            
-            //{"action":{"identity":{"address":"N\u0000sourcecred\u0000core\u0000IDENTITY\u0000VKoeRG5eG3wFrPwUP30quA\u0000","aliases":[],"id":"VKoeRG5eG3wFrPwUP30quA","name":"johnmark13-github","subtype":"USER"},"type":"CREATE_IDENTITY"},"ledgerTimestamp":1652751063468,"uuid":"l011nxUv5Cy7bsGjhgpZqw","version":"1"}
-            //{"action":{"alias":{"address":"N\u0000sourcecred\u0000github\u0000USERLIKE\u0000USER\u0000johnmark13\u0000","description":"github/[@johnmark13](https://github.com/johnmark13)"},"identityId":"VKoeRG5eG3wFrPwUP30quA","type":"ADD_ALIAS"},"ledgerTimestamp":1652751063469,"uuid":"i57Hyx47nL5OUy01sxFqhA","version":"1"}
-            //{"action":{"identity":{"address":"N\u0000sourcecred\u0000core\u0000IDENTITY\u00003dv3p6wrAR6NJrrgNFrHnA\u0000","aliases":[],"id":"3dv3p6wrAR6NJrrgNFrHnA","name":"johnmark13-discourse","subtype":"USER"},"type":"CREATE_IDENTITY"},"ledgerTimestamp":1653185700387,"uuid":"iRVXYBMoADIvsNxO5KKxSw","version":"1"}
-            //{"action":{"alias":{"address":"N\u0000sourcecred\u0000discourse\u0000user\u0000https://forum.nation3.org\u0000johnmark13\u0000","description":"discourse/[@johnmark13](https://forum.nation3.org/u/johnmark13/)"},"identityId":"3dv3p6wrAR6NJrrgNFrHnA","type":"ADD_ALIAS"},"ledgerTimestamp":1653185700388,"uuid":"yFzkuGYWZnt9Wu9D2msL3g","version":"1"}
 
-            // ethAddress = sc.plugins.ethereum.utils.address.parseAddress(address);
-            //const account = ledgerManager.ledger.accountByAddress(ethAlias.address);
-
-            //const uuid = account.identity.id
-
-            
-
-            //create github identity / alias
-            //create discourse identity / alias
-            //set address
-
-            //sc.plugins.ethereum.utils.address.
-
-            console.log(`Checking if address alrady linked: ${baseIdentityId} - ${address}`);
+            console.log(`Checking if address already linked: ${baseIdentityId} - ${address}`);
 
             const linkedAccount = manager.ledger.accountByAddress(sc.plugins.ethereum.utils.address.nodeAddressForEthAddress(address),);
 

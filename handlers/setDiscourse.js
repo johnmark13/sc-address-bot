@@ -20,6 +20,8 @@ module.exports = {
             const baseIdentityId = makeSureUserExistsAndGetId(ledgerManager, intMember);
 
             //Discourse Alias
+            //{"action":{"identity":{"address":"N\u0000sourcecred\u0000core\u0000IDENTITY\u00003dv3p6wrAR6NJrrgNFrHnA\u0000","aliases":[],"id":"3dv3p6wrAR6NJrrgNFrHnA","name":"johnmark13-discourse","subtype":"USER"},"type":"CREATE_IDENTITY"},"ledgerTimestamp":1653185700387,"uuid":"iRVXYBMoADIvsNxO5KKxSw","version":"1"}
+            //{"action":{"alias":{"address":"N\u0000sourcecred\u0000discourse\u0000user\u0000https://forum.nation3.org\u0000johnmark13\u0000","description":"discourse/[@johnmark13](https://forum.nation3.org/u/johnmark13/)"},"identityId":"3dv3p6wrAR6NJrrgNFrHnA","type":"ADD_ALIAS"},"ledgerTimestamp":1653185700388,"uuid":"yFzkuGYWZnt9Wu9D2msL3g","version":"1"}
             const discourseAddress = getDiscourseAddressFromId(discourseUsername, false);
             const discourseAlias = {
                 address: discourseAddress,
