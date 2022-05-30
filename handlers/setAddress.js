@@ -1,5 +1,5 @@
 const sc = require("sourcecred").sourcecred;
-const {getDiscordAddressFromId} = require("../util.js")
+const {makeSureUserExistsAndGetId, getDiscordAddressFromId} = require("../util.js")
 const configs = require("../config.js")
 const commandConstants = require("../commandConstants.js")
 
@@ -16,22 +16,7 @@ module.exports = {
 
         try {
             const ledgerManager = new sc.ledger.manager.LedgerManager({storage: new sc.ledger.storage.WritableGithubStorage({apiToken: process.env.GITHUB_SECRET, repo: config.repo, branch: config.branch})})
-            await ledgerManager.reloadLedger()
-            
-            console.log(`Setting the ball rolling for ${intMember.user.username}`);
-
-            const baseIdentityProposal = sc.plugins.discord.utils.identity.createIdentity(
-                intMember
-            );
-
-            console.log("Porposal created");
-
-            const baseIdentityId = sc.ledger.utils.ensureIdentityExists(
-                ledgerManager.ledger,
-                baseIdentityProposal,
-            );
-
-            console.log(`Base Identity ID ${JSON.stringify(baseIdentityId)}`);
+            const baseIdentityId = makeSureUserExistsAndGetId(ledgerManager, intMember);
 
             //discord Alias
             const discordAddress = getDiscordAddressFromId(intMember.user.username, false);
@@ -45,6 +30,9 @@ module.exports = {
             ledgerManager.ledger.addAlias(baseIdentityId, discordAlias);
 
             console.log(`Added Alias`);
+
+            //github alias
+             
 
             //intMember.user.discriminator
             //{"action":{"identity":{"address":"N\u0000sourcecred\u0000core\u0000IDENTITY\u0000a5tJVT4CBbEWJaXsngglKw\u0000","aliases":[],"id":"a5tJVT4CBbEWJaXsngglKw","name":"JohnMark13","subtype":"USER"},"type":"CREATE_IDENTITY"},"ledgerTimestamp":1652442119715,"uuid":"8q5D883QieY9DvkB51kxZw","version":"1"}

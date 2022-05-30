@@ -1,6 +1,26 @@
 const sc = require("sourcecred").sourcecred;
 
 module.exports = {
+    makeSureUserExistsAndGetId: (ledgerManager, intMember) => {
+        await ledgerManager.reloadLedger()
+        
+        console.log(`Setting the ball rolling for ${intMember.user.username}`);
+
+        const baseIdentityProposal = sc.plugins.discord.utils.identity.createIdentity(
+            intMember
+        );
+
+        console.log("Proposal created");
+
+        const baseIdentityId = sc.ledger.utils.ensureIdentityExists(
+            ledgerManager.ledger,
+            baseIdentityProposal,
+        );
+
+        console.log(`Base Identity ID ${JSON.stringify(baseIdentityId)}`);
+
+        return baseIdentityId;
+    },
     getDiscordAddressFromId: (discordUserId, isBot) => {
         return sc.core.graph.NodeAddress.fromParts([
             "sourcecred",
@@ -11,23 +31,23 @@ module.exports = {
         ]);
     },
 
-    getDiscourseAddressFromId: (discordUserId, isBot) => {
+    getDiscourseAddressFromId: (discourseUsername, isBot) => {
         return sc.core.graph.NodeAddress.fromParts([
             "sourcecred",
-            "discord",
-            "MEMBER",
+            "discourse",
             isBot ? "bot" : "user",
-            discordUserId
+            "https://forum.nation3.org",
+            discourseUsername
         ]);
     },
 
-    getGithubAddressFromId: (discordUserId, isBot) => {
+    getGithubAddressFromId: (githubUsername, isBot) => {
         return sc.core.graph.NodeAddress.fromParts([
             "sourcecred",
-            "discord",
-            "MEMBER",
+            "github",
+            "USERLIKE",
             isBot ? "bot" : "user",
-            discordUserId
+            githubUsername
         ]);
     }
 };

@@ -15,6 +15,8 @@ const env = process.env;
 const BOT_SECRET = env.BOT_SECRET;
 
 const {setAddressHandler} = require("./handlers/setAddress.js");
+const {setDiscourseHandler} = require("./handlers/setDiscourse");
+const {setGithubHandler} = require("./handlers/setGithub.js");
 const {activateHandler, deactivateHandler} = require("./handlers/activate-deactivate.js");
 
 // Create an express app
@@ -64,14 +66,22 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
 
     let resp = "That didn't work";
 
-    if (name === commandConstants.SET_ADDRESS_NAME) {
-      resp = (await setAddressHandler(member, data));
-    }
-    else if (name === commandConstants.ACTIVATE_NAME) {
-        resp = (await activateHandler(member, data));
-    }
-    else if (name === commandConstants.DEACTIVATE_NAME) {
-        resp = (await deactivateHandler(member, data));
+    switch (name) {
+        case commandConstants.SET_ADDRESS_NAME:
+            resp = (await setAddressHandler(member, data));     
+            break; 
+        case commandConstants.SET_DISCOURSE_NAME:
+            resp = (await setDiscourseHandler(member, data));
+            break;
+        case commandConstants.SET_GITHUB_NAME:
+            resp = (await setGithubHandler(member, data));
+            break;
+        case commandConstants.ACTIVATE_NAME:
+            resp = (await activateHandler(member, data));
+            break;
+        case commandConstants.DEACTIVATE_NAME:
+            resp = (await deactivateHandler(member, data));
+            break;
     }
 
 
