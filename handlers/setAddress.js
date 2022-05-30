@@ -21,7 +21,7 @@ module.exports = {
             console.log(`Setting the ball rolling for ${intMember.user.username}`);
 
             const baseIdentityProposal = sc.plugins.discord.utils.identity.createIdentity(
-                intMember.user.username
+                intMember
             );
 
             console.log("Porposal created");
