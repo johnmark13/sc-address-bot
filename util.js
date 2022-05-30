@@ -2,8 +2,6 @@ const sc = require("sourcecred").sourcecred;
 
 module.exports = {
     makeSureUserExistsAndGetId: (ledgerManager, intMember) => {
-        await ledgerManager.reloadLedger()
-        
         console.log(`Setting the ball rolling for ${intMember.user.username}`);
 
         const baseIdentityProposal = sc.plugins.discord.utils.identity.createIdentity(

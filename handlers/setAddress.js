@@ -16,6 +16,7 @@ module.exports = {
 
         try {
             const ledgerManager = new sc.ledger.manager.LedgerManager({storage: new sc.ledger.storage.WritableGithubStorage({apiToken: process.env.GITHUB_SECRET, repo: config.repo, branch: config.branch})})
+            await ledgerManager.reloadLedger();
             const baseIdentityId = makeSureUserExistsAndGetId(ledgerManager, intMember);
 
             //discord Alias
