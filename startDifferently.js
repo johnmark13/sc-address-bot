@@ -15,7 +15,7 @@ const env = process.env;
 const BOT_SECRET = env.BOT_SECRET;
 
 const {setAddressHandler} = require("./handlers/setAddress.js");
-const {setDiscourseHandler} = require("./handlers/setDiscourse");
+const {setDiscourseHandler} = require("./handlers/setDiscourse.js");
 const {setGithubHandler} = require("./handlers/setGithub.js");
 const {activateHandler, deactivateHandler} = require("./handlers/activate-deactivate.js");
 
