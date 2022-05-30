@@ -19,6 +19,7 @@ module.exports = {
             await ledgerManager.reloadLedger();
 
             const account = ledgerManager.ledger.accountByAddress(discordAddress);
+
             const uuid = account.identity.id;
             const oldLength = ledgerManager.ledger.eventLog().length;
 
@@ -49,6 +50,7 @@ module.exports = {
             await ledgerManager.reloadLedger();
 
             const account = ledgerManager.ledger.accountByAddress(discordAddress);
+            
             const uuid = account.identity.id;
             const oldLength = ledgerManager.ledger.eventLog().length;
 

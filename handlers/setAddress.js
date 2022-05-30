@@ -29,7 +29,7 @@ module.exports = {
             );
 
             const account = ledgerManager.ledger.accountByAddress(discordAddress);
-            
+
             if (account) {
                 const uuid = account.identity.id
                 console.log(`SC account already exists, updating payout address: ${uuid}`);
@@ -44,7 +44,7 @@ module.exports = {
             }
             else {
                 console.log(`SC does not exist, creating new alias`);
-                ledgerManager.ledger.addAlias(baseIdentityId, ethAlias);
+                //ledgerManager.ledger.addAlias(baseIdentityId, ethAlias);
                 ledgerManager.ledger.activate(baseIdentityId);
 
                 const result = await manager.persist();
