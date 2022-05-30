@@ -37,7 +37,7 @@ module.exports = {
             const discordAddress = getDiscordAddressFromId(intMember.user.username, false);
             const discordAlias = {
                 address: discordAddress,
-                description: `discord/${intMember.user.usename}#${intMember.user.discriminator}`
+                description: `discord/${intMember.user.username}#${intMember.user.discriminator}`
               };    
 
               console.log(`Going to add Alias ${JSON.stringify(discordAlias)}`);
