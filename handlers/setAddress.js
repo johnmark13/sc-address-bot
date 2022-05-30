@@ -21,9 +21,10 @@ module.exports = {
             console.log(`Setting the ball rolling for ${intMember.user.username}`);
 
             const baseIdentityProposal = sc.plugins.discord.utils.identity.createIdentity(
-                "USER",
                 intMember.user.username
             );
+
+            console.log("Porposal created");
 
             const baseIdentityId = sc.ledger.utils.ensureIdentityExists(
                 ledgerManager.ledger,
