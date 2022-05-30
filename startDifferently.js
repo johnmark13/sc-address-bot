@@ -29,7 +29,6 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
   // Interaction type and data
   const { type, member, data } = req.body;
 
-  console.log("Something happened: " + JSON.stringify(req.body));
   // https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object
   /**{
    *    "application_id":"979772084739797032",
@@ -45,7 +44,8 @@ app.post('/interactions', verifyKeyMiddleware(process.env.PUBLIC_KEY), async fun
    *    "guild_locale":"en-US",
    *    "id":"980495342044860456",
    *    "locale":"en-GB",
-   *    "member":{"avatar":null,"communication_disabled_until":null,"deaf":false,"flags":0,"is_pending":false,"joined_at":"2022-03-24T13:52:36.076000+00:00","mute":false,"nick":null,"pending":false,"permissions":"4398046511103","premium_since":null,"roles":["956560281868316672","956560171281285190"],"user":{"avatar":"e782416d13a94105dc10158c20ad96ae","avatar_decoration":null,"discriminator":"0838","id":"907282205347295302","public_flags":0,"username":"JohnMark13"}},"token":"aW50ZXJhY3Rpb246OTgwNDk1MzQyMDQ0ODYwNDU2OjI0aWR2Sjl1OTNkQU5leWJJM1FUTzI5N0RWazNLUk1IZVg3SW5CYngyalVyYXVUUU9nQnFXeE0xZ2JScjJhSU9kMnlRT3BWTVcxYlpPZE0wV3dkTzJZR0FCY2FKZ1EzTllVYUZPTWpGY1cxaFZZN3FpU1d1ekNTM3BFckM1MzVZ","type":2,"version":1
+   *    "member":{"avatar":null,"communication_disabled_until":null,"deaf":false,"flags":0,"is_pending":false,"joined_at":"2022-03-24T13:52:36.076000+00:00","mute":false,"nick":null,"pending":false,"permissions":"4398046511103","premium_since":null,"roles":["956560281868316672","956560171281285190"],
+   *        "user":{"avatar":"e782416d13a94105dc10158c20ad96ae","avatar_decoration":null,"discriminator":"0838","id":"907282205347295302","public_flags":0,"username":"JohnMark13"}},"token":"aW50ZXJhY3Rpb246OTgwNDk1MzQyMDQ0ODYwNDU2OjI0aWR2Sjl1OTNkQU5leWJJM1FUTzI5N0RWazNLUk1IZVg3SW5CYngyalVyYXVUUU9nQnFXeE0xZ2JScjJhSU9kMnlRT3BWTVcxYlpPZE0wV3dkTzJZR0FCY2FKZ1EzTllVYUZPTWpGY1cxaFZZN3FpU1d1ekNTM3BFckM1MzVZ","type":2,"version":1
    * }
    * 
   /**
