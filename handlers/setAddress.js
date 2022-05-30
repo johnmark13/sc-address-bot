@@ -18,6 +18,8 @@ module.exports = {
             const ledgerManager = new sc.ledger.manager.LedgerManager({storage: new sc.ledger.storage.WritableGithubStorage({apiToken: process.env.GITHUB_SECRET, repo: config.repo, branch: config.branch})})
             await ledgerManager.reloadLedger()
             
+            console.log(`Setting the ball rolling for ${intMember.user.username}`);
+
             const baseIdentityProposal = sc.plugins.discord.utils.identity.createIdentity(
                 "USER",
                 intMember.user.username
@@ -28,6 +30,8 @@ module.exports = {
                 baseIdentityProposal,
             );
 
+            console.log(`Base Identity ID ${JSON.stringify(baseIdentityId)}`);
+
             //discord Alias
             const discordAddress = getDiscordAddressFromId(intMember.user.username, false);
             const discordAlias = {
@@ -35,13 +39,11 @@ module.exports = {
                 description: `discord/${intMember.user.usename}#${intMember.user.discriminator}`
               };    
 
+              console.log(`Going to add Alias ${JSON.stringify(discordAlias)}`);
+
             ledgerManager.ledger.addAlias(baseIdentityId, discordAlias);
 
-            const addAliasResult = await ledgerManager.persist();
-
-            if (addAliasResult.error) {
-                return "Could not add Discord Alias: " + addAliasResult.error.toString();
-            }
+            console.log(`Added Alias`);
 
             //intMember.user.discriminator
             //{"action":{"identity":{"address":"N\u0000sourcecred\u0000core\u0000IDENTITY\u0000a5tJVT4CBbEWJaXsngglKw\u0000","aliases":[],"id":"a5tJVT4CBbEWJaXsngglKw","name":"JohnMark13","subtype":"USER"},"type":"CREATE_IDENTITY"},"ledgerTimestamp":1652442119715,"uuid":"8q5D883QieY9DvkB51kxZw","version":"1"}
