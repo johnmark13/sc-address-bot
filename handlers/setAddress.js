@@ -57,7 +57,15 @@ module.exports = {
 
             //sc.plugins.ethereum.utils.address.
 
-            console.log(`SC account already exists, updating payout address: ${baseIdentityId} - ${address}`);
+            console.log(`Checking if address alrady linked: ${baseIdentityId} - ${address}`);
+
+            const linkedAccount = manager.ledger.accountByAddress(sc.plugins.ethereum.utils.address.nodeAddressForEthAddress(address),);
+
+            console.log("IS there: " + linkedAccount);
+            if (linkedAccount) {
+                console.log(`Eth address linked to existing SC account, is it us?: ${JSON.stringify(baseIdentityId)} - ${JSON.stringify(address)}`);
+
+            }
             ledgerManager.ledger.setPayoutAddress(baseIdentityId, address, config.chainId, config.tokenAddress)
             const result = await ledgerManager.persist();
 

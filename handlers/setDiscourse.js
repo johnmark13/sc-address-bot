@@ -23,7 +23,7 @@ module.exports = {
             const discourseAddress = getDiscourseAddressFromId(discourseUsername, false);
             const discourseAlias = {
                 address: discourseAddress,
-                description: `discourse/[@${discourseUsername}](https://forum.nation3.org/u/@${discourseUsername}/)`
+                description: `discourse/[@${discourseUsername}](${config.discordbaseURL}/u/@${discourseUsername}/)`
               };    
 
               console.log(`Going to add Alias ${JSON.stringify(discourseAlias)}`);
