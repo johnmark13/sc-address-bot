@@ -69,7 +69,7 @@ module.exports = {
             //sc.plugins.ethereum.utils.address.
 
             console.log(`SC account already exists, updating payout address: ${baseIdentityId} - ${address}`);
-            ledgerManager.ledger.setPayoutAddress(uuid, address, config.chainId, config.tokenAddress)
+            ledgerManager.ledger.setPayoutAddress(baseIdentityId, address, config.chainId, config.tokenAddress)
             const result = await ledgerManager.persist();
 
             if (result.error) {
