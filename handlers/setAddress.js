@@ -4,10 +4,9 @@ const configs = require("../config.js")
 const commandConstants = require("../commandConstants.js")
 
 module.exports = {
-    setAddressHandler: async (intMember, intData) => {
-        const addressElement = intData.options[0];
-        const address = addressElement.value;
-        const guildid = intData.guild_id;
+    setAddressHandler: async (interaction) => {
+        const address = interaction.options.getString(commandConstants.SET_ADDRESS_PARAM);
+        const guildid = interaction.guildId;
         const config = configs.GUILD_IDS[guildid];
 
         if (!config) {
@@ -17,12 +16,12 @@ module.exports = {
         try {
             const ledgerManager = new sc.ledger.manager.LedgerManager({storage: new sc.ledger.storage.WritableGithubStorage({apiToken: process.env.GITHUB_SECRET, repo: config.repo, branch: config.branch})})
             await ledgerManager.reloadLedger();
-            const baseIdentityId = makeSureUserExistsAndGetId(ledgerManager, intMember);
+            const baseIdentityId = makeSureUserExistsAndGetId(ledgerManager, interaction.member);
 
-            const discordAddress = getDiscordAddressFromId(intMember.user.username, false);
+            const discordAddress = getDiscordAddressFromId(interaction.member.user.username, false);
             const discordAlias = {
                 address: discordAddress,
-                description: `discord/${intMember.user.username}#${intMember.user.discriminator}`
+                description: `discord/${interaction.member.user.username}#${interaction.member.user.discriminator}`
               };    
 
               console.log(`Going to add Alias ${JSON.stringify(discordAlias)}`);
