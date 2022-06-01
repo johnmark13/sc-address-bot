@@ -17,7 +17,6 @@ client.on('ready', () => {
 });
 
 client.on('interactionCreate', async interaction => {
-  console.log("Someone is interracting with me: " + interaction.content);
   if (!interaction.isCommand()) return;
   if (interaction.commandName === commandConstants.SET_ADDRESS_NAME) {
     await interaction.deferReply();
