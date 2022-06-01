@@ -16,10 +16,6 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('message', async message => {
-  console.log("Someone is talking to me: " + message.content);
-});
-
 client.on('interactionCreate', async interaction => {
   console.log("Someone is interracting with me: " + interaction.content);
   if (!interaction.isCommand()) return;
