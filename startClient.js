@@ -18,14 +18,8 @@ client.on('ready', () => {
 
 client.on('interactionCreate', async interaction => {
   if (!interaction.isCommand()) return;
-  if (interaction.commandName === commandConstants.SET_ADDRESS_NAME) {
-    console.log("Sett address");
-    await interaction.deferReply();
-    console.log("Deferred reply");
-    const resp = await setAddressHandler(interaction);
-    console.log("Got a respose: " + resp);
-    await interaction.editReply({content: resp});
-  }
+  if (interaction.commandName === commandConstants.SET_ADDRESS_NAME)
+    setAddressHandler(interaction);
   if (interaction.commandName === commandConstants.ACTIVATE_NAME)
     activateHandler(interaction)
   if (interaction.commandName === commandConstants.DEACTIVATE_NAME)
