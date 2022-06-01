@@ -1,10 +1,8 @@
+const keep_alive = require('./keep_alive.js')
 const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 const commandConstants = require("./commandConstants.js")
 require('dotenv').config();
-
-const dotenv = require("dotenv")
-dotenv.config()
 
 const env = process.env;
 const BOT_SECRET = env.BOT_SECRET;
@@ -19,7 +17,7 @@ client.on('ready', () => {
 client.on('interactionCreate', async interaction => {
   if (!interaction.isCommand()) return;
   if (interaction.commandName === commandConstants.SET_ADDRESS_NAME)
-    setAddressHandler(interaction);
+    setAddressHandler(interaction)
   if (interaction.commandName === commandConstants.ACTIVATE_NAME)
     activateHandler(interaction)
   if (interaction.commandName === commandConstants.DEACTIVATE_NAME)
