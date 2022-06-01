@@ -14,8 +14,8 @@
   },
   "scripts": {
     "setup": "node createCommands.js",
-    "start": "node createCommands.js && node startDifferently.js",
-    "serve": "node startDifferently.js",
+    "start": "node createCommands.js && node startClient.js",
+    "serve": "node startClient.js",
     "clean": "rm -rf node_modules"
   },
   "repository": {

@@ -27,7 +27,7 @@ client.on('interactionCreate', async interaction => {
     await interaction.deferReply();
     const resp = setAddressHandler(interaction);
     await interaction.editReply({content: resp});
-
+  }
   if (interaction.commandName === commandConstants.ACTIVATE_NAME)
     activateHandler(interaction)
   if (interaction.commandName === commandConstants.DEACTIVATE_NAME)
